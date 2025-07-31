@@ -4,11 +4,11 @@ import './landingPage.css';
 
 
 export default function LandPage(){
-    let imgSource = '/pickingTrash.jpg'
+    let imgSource = process.env.PUBLIC_URL + '/pickingTrash.jpg'
     const slideshowImages = [
-        '/bolehole.jpg',
-        '/kids.jpg',
-        '/plant.jpg'
+        process.env.PUBLIC_URL + '/bolehole.jpg',
+        process.env.PUBLIC_URL + '/kids.jpg',
+        process.env.PUBLIC_URL + '/plant.jpg'
     ];
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -115,12 +115,12 @@ export default function LandPage(){
         </header>
         <section id='body'>
             <section id="recyling" className="body-container">
-                <img src='/recycling.jpg' alt="group picking trash" className="content-image" id="recycle" height='450px'/>
+                <img src={process.env.PUBLIC_URL + '/recycling.jpg'} alt="group picking trash" className="content-image" id="recycle" height='450px'/>
                 <h2>{firstContentHead}</h2>
                 <p>{firstContentPeng}</p>
             </section>
             <section id="dump" className="body-container">
-                <img src='/dump.jpg' alt="land-fill" className="content-image" id="dump" height='450px' width='400px'/>
+                <img src={process.env.PUBLIC_URL + '/dump.jpg'} alt="land-fill" className="content-image" id="dump" height='450px' width='400px'/>
                 <h2>{secondContentHead}</h2>
                 <p>{secondContentPeng}</p>
             </section>
@@ -162,7 +162,7 @@ export default function LandPage(){
                     <li className="contacts">09980000000</li>
                     <li className="contacts">08870000000</li>
                 </ul>
-                <img src='/sani-pic.png' height='500px' id='footerPic'/>
+                <img src={process.env.PUBLIC_URL + '/sani-pic.png'} alt='footer-img' height='500px' id='footerPic'/>
             </footer>
 
         </section>
