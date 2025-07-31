@@ -1,0 +1,189 @@
+#header{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr;
+}
+.header-image{
+    width: 100%;
+    height: 700px;
+    display: block;
+    margin: 0 auto;
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    z-index: -1;
+}
+#get-started{
+    height: 50px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    grid-row: 1;
+    grid-column: 3;
+    align-self:self-start;
+    left: 5px;;
+    
+}
+.logo{
+    font-size: 24px;
+    font-weight: bold;
+    color: blue;
+    text-align: center;
+    grid-row: 1;
+    grid-column: 1;
+    align-self:top ;
+    justify-self: start;
+}
+.shadow{
+    grid-column: 1 / span 3;
+    height: 280px;
+    text-align: center;
+    z-index: -1;
+    color: white;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    grid-row:1 ;
+    align-self:last baseline;
+}
+.title{
+    text-shadow: black 2px 2px 4px;
+}
+#body{
+    display: grid;
+    grid-auto-rows: 1fr;
+}
+.body-container{
+    padding: 10px;
+    box-shadow: 4px 4px 10px 2px gray;
+    border-radius: 0.5cm;
+    margin: 50px 10px 10px 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-height: 80px;
+    max-height: 500px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.4, 0.2, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.body-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.body-container h2{
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    color:blue;
+}
+.body-container p{
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+}
+.content-image{
+    rotate: -3deg;
+    margin-left: 50px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    align-self: center;
+    border-radius: 10%;
+}
+.slideshow-container {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
+.slideshow-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 
+        transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1),
+        opacity 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.slideshow-image.front {
+    transform: translateX(0) scale(1) rotate(-3deg);
+    opacity: 1;
+    z-index: 2;
+}
+
+.slideshow-image.behind {
+    transform: translateX(-40px) scale(0.95) rotate(-8deg);
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.slideshow-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 0; /* Remove top margin */
+}
+
+.slideshow-controls button {
+    margin: 0 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background: #4f83b8da;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-end;
+}
+
+.slideshow-controls button:hover {
+    background: #1565c0;
+}
+.footer{
+    background-color: rgb(34, 32, 32);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 400px;
+    align-self:flex-end;
+}
+#footerPic {
+    grid-column: 3;
+    align-self: start;
+    justify-self: end;
+    position: relative;
+    margin-top: -100px; /* Pulls image up above the container */
+    z-index: 2; /* Ensures it appears above the footer background */
+}
+.contacts{
+    color:white;
+    grid-column: 1;
+    align-self: flex-start;
+}
+#change-language{
+    grid-column: 3;
+    grid-row: 1;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-style: none;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    margin-left: 30px;
+}
