@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import './landingPage.css';
+import Map from './map.js'; 
 
 
 export default function LandPage(){
@@ -99,74 +100,103 @@ export default function LandPage(){
     // Dynamic label for language toggle button
     const langLabel = language === 'eng' ? 'CH' : 'EN';
 
+    // State to control map visibility
+    const [showMap, setShowMap] = useState(false);
+    const handleGetStarted = () => {
+        setShowMap(true);
+    };
+
+    if (showMap) {
+        return <Map onReturnHome={() => setShowMap(false)} />;
+    }
     return (
         <div className="landing-page">
-        <header id="header">
-            <img src={imgSource} alt="group picking trash" className="header-image"/>
-            <button id="get-started">Get started</button>
-            <button onClick={changeLang} id='change-language'>{langLabel}</button>
-            <h1 className='logo'>logo</h1>
-            <section className='shadow'>
-                <h2 className='title'>{headerTitle}</h2>
-                <p className='description'>
-                    {headerContent}
-                </p>
-            </section>
-        </header>
-        <section id='body'>
-            <section id="recyling" className="body-container">
-                <img src={process.env.PUBLIC_URL + '/recycling.jpg'} alt="group picking trash" className="content-image" id="recycle" height='450px'/>
-                <h2>{firstContentHead}</h2>
-                <p>{firstContentPeng}</p>
-            </section>
-            <section id="dump" className="body-container">
-                <img src={process.env.PUBLIC_URL + '/dump.jpg'} alt="land-fill" className="content-image" id="dump" height='450px' width='400px'/>
-                <h2>{secondContentHead}</h2>
-                <p>{secondContentPeng}</p>
-            </section>
-            <section id="trash" className="body-container">
-                <div className="slideshow-container">
-                    <img
-                        src={slideshowImages[prevIndex]}
-                        alt="previous"
-                        className="slideshow-image behind"
-                        style={{ zIndex: 1 }}
-                    />
-                    <img
-                        src={slideshowImages[currentIndex]}
-                        alt="current"
-                        className="slideshow-image front"
-                        style={{ zIndex: 2 }}
-                    />
-                </div>
-                <div className="slideshow-controls">
-                    <button onClick={() => setCurrentIndex(prevIndex)} className="slideshow-button">
-                        -
-                    </button>
-                    <button onClick={() => setCurrentIndex((currentIndex + 1) % slideshowImages.length)} className="slideshow-button">
-                        +
-                    </button>
-                </div>
-                {/* Fact slideshow, language-aware */}
-                <h2 style={{ gridColumn: 2, gridRow: 1, alignSelf: 'start', color: 'blue', fontSize: '40px' }}>
-                    {language === 'eng' ? facts.heading : facts.headingCh}
-                </h2>
-                <p style={{ gridColumn: 2, gridRow: 1, alignSelf: 'center', fontSize: '28px' }}>
-                    {language === 'eng' ? facts.eng[currentIndex] : facts.chi[currentIndex]}
-                </p>
-            </section>         
-            <footer className="footer">
-                <h2 className="contacts">Contacts</h2>
-                <ul>
-                    <li className="contacts">09990000000</li>
-                    <li className="contacts">09980000000</li>
-                    <li className="contacts">08870000000</li>
-                </ul>
-                <img src={process.env.PUBLIC_URL + '/sani-pic.png'} alt='footer-img' height='500px' id='footerPic'/>
-            </footer>
 
-        </section>
+            <header id="header">
+                <img src={imgSource} alt="group picking trash" className="header-image"/>
+                <button onClick={changeLang} id='change-language'>language</button>
+                <h1 className='logo'>logo</h1>
+                    
+                <section className='shadow'>
+                    <h2 className='title'>{headerTitle}</h2>
+                    <p className='description'>
+                        {headerContent}
+                    </p>
+                    <button id="get-started" onClick={handleGetStarted}>Get started</button>
+                </section>
+            </header>
+
+            <section id='body'>
+
+                <section id="recyling" className="body-container">
+                    <img src={process.env.PUBLIC_URL + '/recycling.jpg'} alt="group picking trash" 
+                    className="content-image" id="recycle" />
+                    <h2>{firstContentHead}</h2>
+                    <p>{firstContentPeng}</p>
+                </section>
+
+                <section id="dump" className="body-container">
+                    <img src={process.env.PUBLIC_URL + '/dump.jpg'}
+                     alt="land-fill" className="content-image" id="dump" />
+                    <h2>{secondContentHead}</h2>
+                    <p>{secondContentPeng}</p>
+                </section>
+
+                <section id="trash" className="body-container">
+                    <div className="slideshow-container">
+                        
+                        <img
+                            src={slideshowImages[prevIndex]}
+                            alt="previous"
+                            className="slideshow-image behind"
+                            style={{ zIndex: 1 }}
+                        />
+
+                        <img
+                            src={slideshowImages[currentIndex]}
+                            alt="current"
+                            className="slideshow-image front"
+                            style={{ zIndex: 2 }}
+                        />
+
+                    </div>
+
+                    <div className="slideshow-controls">
+
+                        <button onClick={() => setCurrentIndex(prevIndex)} className="slideshow-button">
+                            -
+                        </button>
+
+                        <button onClick={() => setCurrentIndex((currentIndex + 1) % slideshowImages.length)} className="slideshow-button">
+                            +
+                        </button>
+
+                    </div>
+                    {/* Fact slideshow, language-aware */}
+
+                    <h2 style={{ gridColumn: 2, gridRow: 1, alignSelf: 'start', color: 'blue' }} className="facts-heading">
+                        {language === 'eng' ? facts.heading : facts.headingCh}
+                    </h2>
+
+                    <p style={{ gridColumn: 2, gridRow: 1, alignSelf: 'center'}} className="facts-content">
+                        {language === 'eng' ? facts.eng[currentIndex] : facts.chi[currentIndex]}
+                    </p>
+
+                </section>         
+                <footer className="footer">
+
+                    <h2 className="contacts">Contacts</h2>
+
+                    <ul>
+                        <li className="contacts">09990000000</li>
+                        <li className="contacts">09980000000</li>
+                        <li className="contacts">08870000000</li>
+                    </ul>
+
+                    <img src={process.env.PUBLIC_URL + '/sani-pic.png'} alt='footer-img' id='footerPic'/>
+
+                </footer>
+            </section>
         </div>
-        
     );
 }
