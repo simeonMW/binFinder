@@ -1,85 +1,79 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './landingPage.css';
 import Map from './map.js'; 
+import { IoTrash, IoMan } from "react-icons/io5";
 
 
 export default function LandPage(){
-    let imgSource = process.env.PUBLIC_URL + '/pickingTrash.jpg'
-    const slideshowImages = [
-        process.env.PUBLIC_URL + '/bolehole.jpg',
-        process.env.PUBLIC_URL + '/kids.jpg',
-        process.env.PUBLIC_URL + '/plant.jpg'
-    ];
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    // Calculate previous index for stacking effect
-    const prevIndex = (currentIndex - 1 + slideshowImages.length) % slideshowImages.length;
-
-    // Optional: auto-advance every 3 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % slideshowImages.length);
-        }, 10000); // 10 seconds between transitions
-        return () => clearInterval(interval);
-    }, [slideshowImages.length]);
-
-    useEffect(() => {
-        const observer = new window.IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            },
-            { threshold: 0.2 }
-        );
-        const sections = document.querySelectorAll('.body-container');
-        sections.forEach((section) => observer.observe(section));
-        return () => {
-            sections.forEach((section) => observer.unobserve(section));
-        };
-    }, []);
 
     //changing language
     const langChange = [
         {
             headerTitleEng:<h1>Save the environment</h1>,
             headerTitleChi:<h1>Samalani chilengedwe</h1>,
-            headerPeng:<p>content here</p>,
+            headerPeng:<p>
+                Locate sanitation facilities near you with our geo sanitation facility locator
+                </p>,
             headerPch:<p>Zokamba</p>,
             getStarted:'Yambani'
         },
         {
-            firstContentHead:<h2>Content head</h2>,
-            firstContentHeadch:<h2>Mutu wankhani</h2>,
-            firstContentPeng:<p>statement here</p>,
+            firstContentHead:<h2>Locate sanitation sites near you</h2>,
+            firstContentHeadch:<h2>Pezani ma bini ali pafupi nanu</h2>,
+            firstContentPeng:<p>Use our map to save the environment. Geo sanitation
+                locator was specifically created to ensure that waste is properly disposed of.
+                simply use our maps to find bins and other sanitory facilities, color coded to your 
+                specific need.
+            </p>,
             firstContentch:<p>Zokamba</p>
         },
         {
-            secondContentHead:<h2>Content head</h2>,
+            secondContentHead:<h2>Color coded facilities</h2>,
             secondContentHeadch:<h2>Mutu wankhani</h2>,
-            secondContentPeng:<p>statement here</p>,
             secondContentch:<p>Zokamba</p>
         }
     ]
 
-    // Facts object with English and Chichewa facts for each slide
-    const facts = {
-        heading: 'Did you know?',
-        headingCh: 'Kodi mukudziwa?',
-        eng: [
-            'Recycling helps conserve natural resources.',
-            'Kids can make a big difference in keeping the environment clean.',
-            'Planting trees improves air quality and reduces carbon footprint.'
-        ],
-        chi: [
-            'Kugwilitsanso ntchito zinyalala kumasala zinthu zachilengedwe.',
-            'Ana ali ndikuthekela kosintha chilengedwe.',
-            'Kukonza mitengo kumathandiza kuwonjezera mpweya wabwino komanso kuchepetsa zinyalala za carbon.'
-        ]
-    };
+    const colorCodes = [
+        {
+            id: 1,
+            icon: <IoTrash size={40} color="red"/>,
+            name: 'Hazard bin',
+            example: "Chemicals, batteries..."
+        },
+        {
+            id: 2,
+            icon: <IoTrash size={40} color="blue"/>,
+            name: 'Recyclable',
+            example: "Cardboards, Plastic bottles..."
+        },
+        {
+            id: 3,
+            icon: <IoTrash size={40} color="green"/>,
+            name: 'Organic',
+            example: "food wastes, animal droppings..."
+        },
+        {
+            id: 4,
+            icon: <IoTrash size={40} color="black"/>,
+            name: 'General wastes',
+            example: "Can accomodate any waste"
+        },
+        {
+            id: 5,
+            icon: <IoMan size={40} color="green"/>,
+            name: 'Non-paying toilets',
+            example: "free rest rooms for either gender"
+        },
+        {
+            id: 6,
+            icon: <IoMan size={40} color="purple"/>,
+            name: 'Paying toilets',
+            example: "rest rooms that require a fee"
+        }
+    ]
+
 
     // Language state: 'eng' (default) or 'chi'
     const [language, setLanguage] = useState('eng');
@@ -90,15 +84,12 @@ export default function LandPage(){
     let firstContentHead = language === 'eng' ? langChange[1].firstContentHead : langChange[1].firstContentHeadch;
     let firstContentPeng = language === 'eng' ? langChange[1].firstContentPeng : langChange[1].firstContentch;
     let secondContentHead = language === 'eng' ? langChange[2].secondContentHead : langChange[2].secondContentHeadch;
-    let secondContentPeng = language === 'eng' ? langChange[2].secondContentPeng : langChange[2].secondContentch;
 
     // Toggle language between English and Chichewa
     const changeLang = () => {
         setLanguage((prev) => (prev === 'eng' ? 'chi' : 'eng'));
     } 
 
-    // Dynamic label for language toggle button
-    const langLabel = language === 'eng' ? 'CH' : 'EN';
 
     // State to control map visibility
     const [showMap, setShowMap] = useState(false);
@@ -113,9 +104,11 @@ export default function LandPage(){
         <div className="landing-page">
 
             <header id="header">
-                <img src={imgSource} alt="group picking trash" className="header-image"/>
-                <button onClick={changeLang} id='change-language'>language</button>
-                <h1 className='logo'>logo</h1>
+                <div className="nav-bar">
+                    <h2 className='logo'>logo</h2>
+                    <button onClick={changeLang} id='change-language'>language</button> 
+                </div>
+               
                     
                 <section className='shadow'>
                     <h2 className='title'>{headerTitle}</h2>
@@ -128,59 +121,51 @@ export default function LandPage(){
 
             <section id='body'>
 
-                <section id="recyling" className="body-container">
-                    <img src={process.env.PUBLIC_URL + '/recycling.jpg'} alt="group picking trash" 
-                    className="content-image" id="recycle" />
-                    <h2>{firstContentHead}</h2>
-                    <p>{firstContentPeng}</p>
+                <section className='map-explain'>
+                    <div className="first-statement">
+                        <h2>{firstContentHead}</h2>
+                        <p>{firstContentPeng}</p>
+                    </div>
+                    
+                    <img src={process.env.PUBLIC_URL + '/mapScreenshot.PNG'} alt="group picking trash" 
+                    className="map-image" id="recycle" />
                 </section>
 
-                <section id="dump" className="body-container">
-                    <img src={process.env.PUBLIC_URL + '/dump.jpg'}
-                     alt="land-fill" className="content-image" id="dump" />
-                    <h2>{secondContentHead}</h2>
-                    <p>{secondContentPeng}</p>
+                <section id="dump" className="color-code-container">
+                   <div className="color-code-head">
+                      <h2>{secondContentHead}</h2>
+                   </div>
+
+                    <div className="color-code-items">
+                        {
+                            colorCodes.map((item) => (
+                                <div key={item.id} className='color-codes'>
+                                    {item.icon}
+                                    <p>{item.name}</p>
+                                    <p>{item.example}</p>
+                                </div>
+                            )
+                            )
+                        }
+                    </div>
+                   
                 </section>
 
                 <section id="trash" className="body-container">
-                    <div className="slideshow-container">
-                        
-                        <img
-                            src={slideshowImages[prevIndex]}
-                            alt="previous"
-                            className="slideshow-image behind"
-                            style={{ zIndex: 1 }}
-                        />
+                   <div className="recycle">
+                     <img src={process.env.PUBLIC_URL + '/recycling.png'} alt="woman recycling"/>
 
-                        <img
-                            src={slideshowImages[currentIndex]}
-                            alt="current"
-                            className="slideshow-image front"
-                            style={{ zIndex: 2 }}
-                        />
-
-                    </div>
-
-                    <div className="slideshow-controls">
-
-                        <button onClick={() => setCurrentIndex(prevIndex)} className="slideshow-button">
-                            -
-                        </button>
-
-                        <button onClick={() => setCurrentIndex((currentIndex + 1) % slideshowImages.length)} className="slideshow-button">
-                            +
-                        </button>
-
-                    </div>
-                    {/* Fact slideshow, language-aware */}
-
-                    <h2 style={{ gridColumn: 2, gridRow: 1, alignSelf: 'start', color: 'blue' }} className="facts-heading">
-                        {language === 'eng' ? facts.heading : facts.headingCh}
-                    </h2>
-
-                    <p style={{ gridColumn: 2, gridRow: 1, alignSelf: 'center'}} className="facts-content">
-                        {language === 'eng' ? facts.eng[currentIndex] : facts.chi[currentIndex]}
-                    </p>
+                     <div className='recycle-text'>
+                        <h2>Why dispose when you can recycle?</h2>
+                        <p>
+                            recycling does more to the environment.<br/> The best way
+                            to dispose wastes is to not dispose at all. See where you can dispose 
+                            recycle wastes on our maps.
+                        </p>
+                     <button id="get-started" onClick={handleGetStarted}>Get started</button>
+                     </div>
+                     
+                   </div>
 
                 </section>         
                 <footer className="footer">
