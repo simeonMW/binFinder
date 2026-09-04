@@ -42,7 +42,7 @@ export default function LandPage(){
             thirdContentPeng: <p>recycling does more to the environment.<br/> The best way
                             to dispose wastes is to not dispose at all. See where you can dispose 
                             recycle wastes on our maps.</p>,
-            thirdContentHeadch: <h2>Mutayilenji pamene mutha kugwilitsanso ntchito?</h2>,
+            thirdContentHeadch: <h2>Gwilitsansoni ntchito zinyalala</h2>,
             thirdContentch:<p>Pali Phindu lalikulu losamalira chilengedwe komanso
                 lopeza chuma pogwilitsanso ntchito zinyalala. Izi ndizotheka ngat pali njila yopatulila zinyalala pamalo otayila
                 zinyalala
