@@ -15,7 +15,7 @@ export default function LandPage(){
             headerPeng:<p>
                 Locate sanitation facilities near you with our geo sanitation facility locator
                 </p>,
-            headerPch:<p>Zokamba</p>,
+            headerPch:<p>Pezani malo otayila zinyalala kudzela mapu athu</p>,
             getStarted:'Yambani'
         },
         {
@@ -26,12 +26,27 @@ export default function LandPage(){
                 simply use our maps to find bins and other sanitory facilities, color coded to your 
                 specific need.
             </p>,
-            firstContentch:<p>Zokamba</p>
+            firstContentch:<p>Gwilitsani ntchito mapu athu kuti musamale chilengedwe. Kalozera
+                wa zida za ukhondo, anapangidwa kuti muzitaya zinyalala molondola. 
+                Gwilitsani ntchito mapu athu kuti mupeze ma bini malinganan ndi mtundu 
+                wa zinyalala komanso malo ena a zaukhondo
+            </p>
         },
         {
             secondContentHead:<h2>Color coded facilities</h2>,
-            secondContentHeadch:<h2>Mutu wankhani</h2>,
+            secondContentHeadch:<h2>Mitundu yama bini ndi matanthauzo ake</h2>,
             secondContentch:<p>Zokamba</p>
+        },
+        {
+            thirdContentHead: <h2>Why dispose when you can recycle?</h2>,
+            thirdContentPeng: <p>recycling does more to the environment.<br/> The best way
+                            to dispose wastes is to not dispose at all. See where you can dispose 
+                            recycle wastes on our maps.</p>,
+            thirdContentHeadch: <h2>Mutayilenji pamene mutha kugwilitsanso ntchito?</h2>,
+            thirdContentch:<p>Pali Phindu lalikulu losamalira chilengedwe komanso
+                lopeza chuma pogwilitsanso ntchito zinyalala. Izi ndizotheka ngat pali njila yopatulila zinyalala pamalo otayila
+                zinyalala
+            </p>
         }
     ]
 
@@ -84,7 +99,9 @@ export default function LandPage(){
     let firstContentHead = language === 'eng' ? langChange[1].firstContentHead : langChange[1].firstContentHeadch;
     let firstContentPeng = language === 'eng' ? langChange[1].firstContentPeng : langChange[1].firstContentch;
     let secondContentHead = language === 'eng' ? langChange[2].secondContentHead : langChange[2].secondContentHeadch;
-
+    let secondContentPeng = language === 'eng' ? langChange[2].secondContentPeng : langChange[2].secondContentch;
+    let thirdContentHead = language === 'eng' ? langChange[3].thirdContentHead : langChange[3].thirdContentHeadch;
+    let thirdContentPeng = language === 'eng' ? langChange[3].thirdContentPeng : langChange[3].thirdContentch;
     // Toggle language between English and Chichewa
     const changeLang = () => {
         setLanguage((prev) => (prev === 'eng' ? 'chi' : 'eng'));
@@ -156,11 +173,9 @@ export default function LandPage(){
                      <img src={process.env.PUBLIC_URL + '/recycling.png'} alt="woman recycling"/>
 
                      <div className='recycle-text'>
-                        <h2>Why dispose when you can recycle?</h2>
+                        <h2>{thirdContentHead}</h2>
                         <p>
-                            recycling does more to the environment.<br/> The best way
-                            to dispose wastes is to not dispose at all. See where you can dispose 
-                            recycle wastes on our maps.
+                           {thirdContentPeng} 
                         </p>
                      <button id="get-started" onClick={handleGetStarted}>Get started</button>
                      </div>
