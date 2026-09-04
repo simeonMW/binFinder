@@ -99,7 +99,6 @@ export default function LandPage(){
     let firstContentHead = language === 'eng' ? langChange[1].firstContentHead : langChange[1].firstContentHeadch;
     let firstContentPeng = language === 'eng' ? langChange[1].firstContentPeng : langChange[1].firstContentch;
     let secondContentHead = language === 'eng' ? langChange[2].secondContentHead : langChange[2].secondContentHeadch;
-    let secondContentPeng = language === 'eng' ? langChange[2].secondContentPeng : langChange[2].secondContentch;
     let thirdContentHead = language === 'eng' ? langChange[3].thirdContentHead : langChange[3].thirdContentHeadch;
     let thirdContentPeng = language === 'eng' ? langChange[3].thirdContentPeng : langChange[3].thirdContentch;
     // Toggle language between English and Chichewa
